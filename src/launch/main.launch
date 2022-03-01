@@ -1,0 +1,8 @@
+<launch>
+    <node
+        pkg = "action_template"
+        type = "main.py"
+        name = "jinko"
+        output = "screen">
+    </node>
+</launch>

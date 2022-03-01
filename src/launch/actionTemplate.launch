@@ -1,0 +1,8 @@
+<launch>
+    <node
+        pkg = "action_template"
+        type = "actionTemplate.py"
+        name = "action_template"
+        output = "screen">
+    </node>
+</launch>
