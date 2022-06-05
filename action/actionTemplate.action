@@ -1,10 +1,10 @@
 # Definición de los mensajes de la acción
 # Goal: 
 string name
-uint32[] questions
+string[] questions
 ---
 # Result: comprobacion fin
 bool success
 ---
 # Feedback: tiempo pasado y tiempo que queda
-uint32 currentTime
+string currentTime
