@@ -1,4 +1,5 @@
 ./.vscode
+./run.sh
 ./src/config
 ./src/audios
 *.pyc
