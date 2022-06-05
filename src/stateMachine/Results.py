@@ -3,6 +3,7 @@ import rospy
 from smach import State
 from services.Polly import pollySever
 from services.db import dbSever
+from datetime import datetime
 
 class Results(State):
     def __init__(self):
@@ -11,7 +12,7 @@ class Results(State):
     def execute(self, userdata):
         self.debug(userdata)
         # self.testSavePatient()
-        # self.testSaveResults()
+        self.testSaveResults()
         return '0'
 
     def debug(self, userdata):
@@ -39,14 +40,25 @@ class Results(State):
         dbSever.savePatient(patient)
 
     def testSaveResults(self):
+        totalQuestions = 1
+        ok = ""
         name = rospy.get_param('name')
+        emotion = rospy.get_param('emotion')
+        emotionTime = rospy.get_param('emotionTime')
+        now = datetime.now()
+
+        if emotion == "True":
+            ok = "1/" + str(totalQuestions)
+        else:
+            ok = "0/" + str(totalQuestions)
+
         results = {}
-        results['date'] = 1619310818
-        results['ko'] = '2/3'
+        results['date'] = datetime.timestamp(now)
+        # results['ko'] = ko
         results['latence'] = -12
-        results['ok'] = '1/3'
+        results['ok'] = ok
         results['omision'] = '0/3'
-        results['totalTime'] = 1134
+        results['totalTime'] = emotionTime
         dbSever.saveResults(name, results)
 
 
