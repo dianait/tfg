@@ -9,11 +9,11 @@ def emotionClient(answer):
     sos = jinko_games_messageRequest()
     sos.answer = answer
     result = emotionService(sos)
-    return str(result.success)
+    return make_EmotionResult(str(result.success), result.timeElapsed)
 
 class EmotionResult(object):
     result = ""
-    time = 0
+    time = ""
 
 def make_EmotionResult(result, time):
     emotionResult = EmotionResult()
