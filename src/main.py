@@ -10,15 +10,15 @@ def start(goal):
     sm = StateMachineClass(name, questions)
     sm.execute()
     result = actionTemplateResult()
-    result.success = True
+    result.success = "True"
     # rospy.loginfo('%s: Succeeded')
     server.set_succeeded(result) 
 
 rospy.init_node('jinko')
 server = actionlib.SimpleActionServer('jinkoAction', actionTemplateAction, start, False) 
 server.start()
-# print("Esperando el goal")
-# rospy.loginfo("Lanzamos el servidor action_template") 
+print("Esperando el goal")
+rospy.loginfo("Lanzamos el servidor action_template") 
 rospy.spin() 
 
 # feedback = actionTemplateFeedback()
