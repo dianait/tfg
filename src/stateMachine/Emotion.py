@@ -2,7 +2,6 @@
 import rospy
 from smach import State 
 from servicesClients.emotionClient import emotionClient
-from time import time
 from services.Polly import pollySever
 from services.db import dbSever
 
@@ -29,10 +28,13 @@ class Emotion(State):
         if outcome == "True":
             pollySever.generarAudio(self.resultOK, 'resultOK.mp3')
         else:
-            if self.count == self.NUM_QUESTIONS - 1:
-                pollySever.generarAudio("Vamos a pasar al siguiente ejercicio", 'next.mp3')
-            else:
-                pollySever.generarAudio(self.resultKO, 'resultKO.mp3')
+            #if self.count == self.NUM_QUESTIONS - 1:
+                #pollySever.generarAudio("Vamos a pasar al siguiente ejercicio", 'next.mp3')
+            #else:
+            pollySever.generarAudio(self.resultKO, 'resultKO.mp3')
+            nameAudio = 'emotion-' + str(self.id) + ".mp3"
+            pollySever.generarAudio(self.question, nameAudio)
+              
 
         self.setResults(outcome, timeElapsed)
         self.selectNextQuestion()
@@ -43,7 +45,7 @@ class Emotion(State):
         return '1'
 
     def getInfoQuestions(self, id):
-        q = self.getQuestion(id)
+        q = self.getQuestion(int(id))
         self.question = q['question']
         self.answer = q['answer']
         self.id = q['id']
@@ -61,11 +63,8 @@ class Emotion(State):
         pollySever.generarAudio(self.question, nameAudio)
 
     def startQuestion(self):
-        start = time()
         output = emotionClient(self.answer)
-        end = time()
-        timeElapsed = round((end - start),2)
-        return [output, timeElapsed]
+        return [output.result, output.time]
     
     def selectNextQuestion(self):
         self.count = self.count + 1
