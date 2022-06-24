@@ -20,7 +20,7 @@ class Orientation(State):
         # coordy = userdata.coordy
 
         start = time()
-        orientationClient(coordx, coordy)
+        # orientationClient(coordx, coordy)
         end = time()
 
         timeElapsed = round((end - start),2)

@@ -11,6 +11,11 @@ find_package(catkin REQUIRED COMPONENTS
   jinko_service_msg
 )
 
+if(CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+  add_rostest(test/mynode.test)
+endif()
+
 ## Generate messages in the 'msg' folder
 # add_message_files(
 #   FILES
@@ -32,7 +37,7 @@ add_action_files(
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
-  std_msgs  # Or other packages containing msgs
+  std_msgs  
   actionlib_msgs
 )
 

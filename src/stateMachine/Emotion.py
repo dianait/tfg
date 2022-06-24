@@ -15,34 +15,36 @@ class Emotion(State):
         self.resultOK = "¡Muy bien! Amelia"
         self.resultKO = "Vamos a probar otra vez, ¿Vale?"
         self.count = 0
+        self.repeat = False
         
     def execute(self, userdata):
         self.questions = userdata.questions
         self.NUM_QUESTIONS = len(self.questions)
         self.getInfoQuestions(self.questions[self.count])
-        self.startTalking()
-        result = self.startQuestion()
-        outcome = result[0]
-        timeElapsed = result[1]
-
-        if outcome == "True":
-            pollySever.generarAudio(self.resultOK, 'resultOK.mp3')
-        else:
-            #if self.count == self.NUM_QUESTIONS - 1:
-                #pollySever.generarAudio("Vamos a pasar al siguiente ejercicio", 'next.mp3')
-            #else:
-            pollySever.generarAudio(self.resultKO, 'resultKO.mp3')
-            nameAudio = 'emotion-' + str(self.id) + ".mp3"
-            pollySever.generarAudio(self.question, nameAudio)
-              
-
-        self.setResults(outcome, timeElapsed)
-        self.selectNextQuestion()
-
-        if self.count == self.NUM_QUESTIONS:
-            print("Se han hecho todas las preguntas")
-            return '0'
-        return '1'
+        while self.count < self.NUM_QUESTIONS:
+            self.repeat = False
+            self.startTalking(self.count, 'slow')
+            output = emotionClient(self.answer)
+            if output.result == "True":
+                pollySever.generarAudio(self.resultOK, 'resultOK.mp3')
+                self.count = self.count + 1
+                break
+            else:
+                pollySever.generarAudio(self.resultKO, 'resultKO.mp3')
+                if self.repeat == False:
+                    self.repeat = True
+                    self.startTalking(self.count, 'x-slow')
+                    output = emotionClient(self.answer)
+                    if output.result == "True":
+                        pollySever.generarAudio(self.resultOK, 'resultOK.mp3')
+                        self.count = self.count + 1
+                        break
+                    else:
+                        pollySever.generarAudio("No pasa nada, Amelia", 'resultKOFinal.mp3')
+                        self.count = self.count + 1
+                        break
+        pollySever.generarAudio("Vamos a pasar al siguiente ejercicio", 'next.mp3')
+        return '0'
 
     def getInfoQuestions(self, id):
         q = self.getQuestion(int(id))
@@ -58,17 +60,8 @@ class Emotion(State):
         q = dbSever.getQuestionFromID(id)
         return q.to_dict()
 
-    def startTalking(self):
-        nameAudio = 'emotion-' + str(self.id) + ".mp3"
-        pollySever.generarAudio(self.question, nameAudio)
-
-    def startQuestion(self):
-        output = emotionClient(self.answer)
-        return [output.result, output.time]
+    def startTalking(self, id, rate):
+        nameAudio = 'emotion-' + str(id) + ".mp3"
+        pollySever.generarAudio(self.question, nameAudio, rate)
     
-    def selectNextQuestion(self):
-        self.count = self.count + 1
-
-        
-
         

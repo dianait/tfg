@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="action_template" type="mynode" name="mynode" />
+  <test test-name="test_mynode" pkg="action_template" type="test_mynode" />
+</launch>

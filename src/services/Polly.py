@@ -45,7 +45,7 @@ class Polly:
         self.outputFormat = outputFormat
         
     # Metodo que genera una pista de audio a partir de un texto
-    def generarAudio(self, texto, nombreArchivo):
+    def generarAudio(self, texto, nombreArchivo, rate = "slow"):
         """This is a method of Polly class
 
         Args:
@@ -53,15 +53,14 @@ class Polly:
             nombreArchivo (string): The name of file tha we can generate
         """        
         
-        print("Generate sound file")
         if not self.checkIfAudioExist(nombreArchivo):
             response = self.polly_client.synthesize_speech(
                     VoiceId=self.vozId,
-                    # Engine="neural",
+                    Engine="neural",
+                    TextType="ssml",
                     OutputFormat=self.outputFormat, 
-                    Text = texto)
+                    Text = "<prosody rate='%s'> %s </prosody>" % (rate,texto))
 
-            # archivo = self.rutaFicheroPistas+"/"+nombreArchivo
             archivo = self.baseURL + nombreArchivo
         
             print(archivo)
@@ -69,7 +68,6 @@ class Polly:
             file.write(response['AudioStream'].read())
             file.close()
         
-            # self.pistasDeAudio[nombreArchivo] = response['AudioStream']
         self.reproducirAudio(nombreArchivo)
     
     # Metodo que reproduce la pista
@@ -82,7 +80,6 @@ class Polly:
         archivo = self.baseURL + nombreArchivo # Ruta donde se encuentra el archivo
         
         #  Uso de la libreria pygame para la reporduccion de audio
-        print("Play Sound")
         pygame.init()
         sound = pygame.mixer.Sound(archivo) # Guardamos el audio en una variable
         sound.play() # Reproduccion del audio
@@ -97,7 +94,6 @@ class Polly:
             nombreArchivo (string): Name of file that we can delete
         """        
         
-        print("Delete sound file")
         archivo = self.rutaFicheroPistas+"/"+nombreArchivo # Ruta donde se encuentra el archivo
         os.remove(archivo) # Borrar archivo
 
@@ -107,7 +103,23 @@ class Polly:
                 if files == nameAudio:
                     return True
                 return False
-    
+
+    def generateSSML(self):
+        response = self.polly_client.synthesize_speech(
+                    VoiceId=self.vozId,
+                    Engine="neural",
+                    TextType="ssml",
+                    OutputFormat=self.outputFormat, 
+                    Text = "<prosody rate='x-slow'>Hola que tal?</prosody>")
+
+        archivo = self.baseURL + "test"
+        
+        print(archivo)
+        file = open(archivo, 'wb')
+        file.write(response['AudioStream'].read())
+        file.close()
+        
+        self.reproducirAudio("test")
 
 def polly():
     return Polly()

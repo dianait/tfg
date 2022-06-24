@@ -10,7 +10,7 @@ def start(goal):
     sm = StateMachineClass(name, questions)
     sm.execute()
     result = actionTemplateResult()
-    result.success = "True"
+    result.success = True
     # rospy.loginfo('%s: Succeeded')
     server.set_succeeded(result) 
 
