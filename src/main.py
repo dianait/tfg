@@ -7,7 +7,8 @@ from stateMachine.stateMachine import StateMachineClass
 def start(goal):
     name = goal.name
     questions = goal.questions
-    sm = StateMachineClass(name, questions)
+    difficulty = goal.difficulty
+    sm = StateMachineClass(name, questions, difficulty)
     sm.execute()
     result = actionTemplateResult()
     result.success = True
