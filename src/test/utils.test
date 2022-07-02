@@ -1,0 +1,9 @@
+<launch>
+    <node
+        pkg = "action_template"
+        type = "actionTemplate.py"
+        name = "action_template"
+        output = "screen">
+    </node>
+       <test test-name="test" pkg="action_template" type="utils.py" />
+</launch>
