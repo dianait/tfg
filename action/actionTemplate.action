@@ -1,7 +1,8 @@
 # Definición de los mensajes de la acción
 # Goal: 
 string name
-string[] questions
+uint32 questions
+string difficulty
 ---
 # Result: comprobacion fin
 bool success
