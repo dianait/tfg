@@ -8,7 +8,7 @@ from services.db import dbSever
 class Emotion(State):
 
     def __init__(self):
-        State.__init__(self,  outcomes=['2','1','0'], input_keys=['questions'], output_keys=[1.0, 0.5])
+        State.__init__(self,  outcomes=['2','1','0'], input_keys=['questions','difficulty'], output_keys=['difficulty'])
         self.id = 0
         self.question = ""
         self.anwer = ""
@@ -19,8 +19,8 @@ class Emotion(State):
         
     def execute(self, userdata):
         self.questions = userdata.questions
-        self.NUM_QUESTIONS = len(self.questions)
-        self.getInfoQuestions(self.questions[self.count])
+        self.NUM_QUESTIONS = self.questions
+        self.getInfoQuestions(self.questions)
         while self.count < self.NUM_QUESTIONS:
             self.repeat = False
             self.startTalking(self.count, 'slow')
@@ -43,11 +43,12 @@ class Emotion(State):
                         pollySever.generarAudio("No pasa nada, Amelia", 'resultKOFinal.mp3')
                         self.count = self.count + 1
                         break
+        self.setResults("True", 0.3)
         pollySever.generarAudio("Vamos a pasar al siguiente ejercicio", 'next.mp3')
         return '0'
 
     def getInfoQuestions(self, id):
-        q = self.getQuestion(int(id))
+        q = self.getQuestion(id)
         self.question = q['question']
         self.answer = q['answer']
         self.id = q['id']

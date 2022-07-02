@@ -12,11 +12,11 @@ class Results(State):
     def execute(self, userdata):
         self.debug(userdata)
         # self.testSavePatient()
-        self.testSaveResults()
+        # self.testSaveResults()
         return '0'
 
     def debug(self, userdata):
-        message = "Hemos terminado, " + userdata.name + "Lo has hecho muy bien. ¡Hasta la próxima!"
+        message = "Hemos terminado, " + userdata.name + ". Lo has hecho muy bien. ¡Hasta la próxima!"
         nameAudio = "results-" + userdata.name + ".mp3"
         pollySever.generarAudio(message, nameAudio)
         name = rospy.get_param('name')

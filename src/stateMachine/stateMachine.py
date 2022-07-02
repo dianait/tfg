@@ -6,10 +6,11 @@ from stateMachine.Grettings import Grettings
 from stateMachine.Results import Results
 
 class StateMachineClass:
-    def __init__(self, name, questions):
+    def __init__(self, name, questions, difficulty):
         self.sm = StateMachine(outcomes=['succeeded','aborted'])
         self.sm.userdata.name = name
         self.sm.userdata.questions = questions
+        self.sm.userdata.difficulty = difficulty
         with self.sm:
             StateMachine.add('Grettings', Grettings(), 
             transitions={'1':'Emotion', '0': 'succeeded', '2': 'aborted'}, remapping={'input':'time','output':'input'})
