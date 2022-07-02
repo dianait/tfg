@@ -13,7 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
-  add_rostest(test/mynode.test)
+   add_rostest(test/test.test)
 endif()
 
 ## Generate messages in the 'msg' folder
@@ -66,7 +66,7 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
   ${catkin_INCLUDE_DIRS}
 )
 
+ catkin_add_nosetests(test)
