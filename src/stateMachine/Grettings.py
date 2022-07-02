@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 from smach import State
+import rospy
 from services.Polly import pollySever
 from Utils import Utils
 
@@ -12,7 +13,7 @@ class Grettings(State):
         if not userdata.name:
             return '2'
 
-        self.utils.saveData(userdata)
+        self.saveData(userdata)
         self.startTalking(userdata)
         return '1'
 
@@ -20,3 +21,8 @@ class Grettings(State):
         message = "Hola, "+ str(userdata.name) + ", soy Jinko. Vamos a empezar..."
         nameAudio = 'grettings-' + userdata.name + ".mp3"
         pollySever.generarAudio(message, nameAudio)
+
+    def saveData(self, userdata):
+        rospy.set_param('name', userdata.name)
+        rospy.set_param('questions', userdata.questions)
+        rospy.set_param('difficulty', userdata.difficulty)
