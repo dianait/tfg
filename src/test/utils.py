@@ -6,7 +6,7 @@ import rospy
 sys.path.append('/home/diana/catkin_ws/src/action-template/src')     
 from Utils import Utils
 
-class MyTestCase1(unittest.TestCase):
+class UtilTests(unittest.TestCase):
 
     def setUp(self):
         self.utils = Utils()
@@ -24,4 +24,4 @@ class MyTestCase1(unittest.TestCase):
 if __name__ == '__main__':
     import rosunit
     rospy.init_node("test")
-    rosunit.unitrun(PKG, 'MyTestCase1', MyTestCase1)
+    rosunit.unitrun(PKG, 'MyTestCase1', UtilTests)
