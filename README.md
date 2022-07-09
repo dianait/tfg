@@ -1,37 +1,28 @@
-# 🎰 Máquina de estados
+# JINKOBOT
 
-### 📉 Diagrama de estados
+<center><h2>Robot terapeútico para niños con Trastorno del Espectro Autista (TEA)</h2><br /></center>
 
-<p align=center><img width="300" src="./docs/maquinaEstados.png" /></p>
+<p align=center><img src="./docs/BUENA.png" /></p>
 
-## 🌟 Estados
+<p align=center>
+<b>Trabajo Final de Grado</b> de Diana Hernández Soler <br/>
+Grado en <b>Tencologías Interactivas</b> <br/>
+Universidad Politécnica de Valencia <br/>
+Campus de Gandía <br/>
+septiembre 2022 <br/>
+</p>
 
-### 👋 Grettings
-
-- Recibe información sobre el niño y el un array con los ids de las preguntas a realizar
-- Se guardan en el estado global de la aplicacion ROS
-- Saluda al niño y empieza con el primer ejercicio
-
----
-
-     💬 Hola Amelia, soy Jinko, Vamos a empezar
-         ➡️ EMOTION
-
-### ❤️ Emotion
-
-- Recoge los ids del estado global
-- Rrecupera las preguntas y sus respuestas de la base de datos
+## 🛠 Tecnologías utilizadas
 
 ---
 
-    ¿Todas las preguntas realizadas? ➡️ ORIENTATION
-     💬 PREGUNTA
-        Acierto  Pasa a la siguiente pregunta  ➡️ EMOTION
-        Fallo 💬 Repite más despacio  ➡️ EMOTION
+<p align=center><img src="./docs/tecnologiasBien.png" /></p>
 
-### ⤴️ Orientation
+## ⛓ Links
 
-### 📚 Results
+---
 
-- Guarda los datos en la BBDD
-- Se despide del niño
+- [Repositorio con los paquetes de ROS]()
+- [Repositorio de la Aplicación web ]()
+- [ Memoria ]()
+- [Video demostración ]()
