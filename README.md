@@ -16,7 +16,7 @@ septiembre 2022 <br/>
 
 ---
 
-<p align=center><img src="./docs/tecnologiasBien.png" /></p>
+<p align=center><img src="https://github.com/DianaIT/tfg/blob/master/docs/tecnologiasBIEN.png" /></p>
 
 ## ⛓ Links
 
