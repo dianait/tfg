@@ -23,6 +23,8 @@ septiembre 2022 <br/>
 ---
 
 - [Repositorio con los paquetes de ROS]()
-- [Repositorio de la Aplicación web ]()
-- [ Memoria ]()
-- [Video demostración ]()
+- [Repositorio Ejercicio Emociones: Reconomiento de imágenes en tiempo real con Python](https://github.com/DianaIT/Emotion)
+- [Repositorio Ejercicio Orientaicon: Navegación autónoma con ROS](https://github.com/DianaIT/Orientation)
+- [Repositorio de la Aplicación web ](https://github.com/DianaIT/jinkobot)
+- [ Memoria ]() (TBD)
+- [Video demostración ]() (TBD)
