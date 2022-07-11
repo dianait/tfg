@@ -22,6 +22,7 @@ septiembre 2022 <br/>
 
 ---
 
+- [ Máquina de estados en Python](https://github.com/DianaIT/tfg/blob/master/src/stateMachine/README.md)
 - [Repositorio Ejercicio Emociones: Reconomiento de imágenes en tiempo real con Python](https://github.com/DianaIT/Emotion)
 - [Repositorio Ejercicio Orientaicon: Navegación autónoma con ROS](https://github.com/DianaIT/Orientation)
 - [Repositorio de la Aplicación web ](https://github.com/DianaIT/jinkobot)
